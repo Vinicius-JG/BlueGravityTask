@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory_UI : MonoBehaviour
+public class Inventory_UI : Page_UI
 {
     [SerializeField] GameObject slot_UI;
 
