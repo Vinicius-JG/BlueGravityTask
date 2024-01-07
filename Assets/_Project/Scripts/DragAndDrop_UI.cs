@@ -9,7 +9,7 @@ public class DragAndDrop_UI : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     RectTransform rectTransform;
     CanvasGroup canvasGroup;
 
-    public Transform startParent;
+    [HideInInspector] public Transform startParent;
 
     private void Awake()
     {

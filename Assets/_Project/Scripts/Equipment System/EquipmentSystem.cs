@@ -8,7 +8,7 @@ using UnityEngine;
 public class EquipmentSystem : MonoBehaviour
 {
 	[Serializable]
-	private struct EquipmentSlot
+	public struct EquipmentSlot
 	{
 		public ItemSO.Type type;
         public ItemSO itemSO;
@@ -16,19 +16,20 @@ public class EquipmentSystem : MonoBehaviour
 	}
 
 	[SerializeField] EquipmentSlot[] equipmentSlots;
+    public Action OnEquipsChanged;
 
-	private void Awake()
+    private void Awake()
 	{
 		RefreshEquipments();
 	}
 
-	public void EquipItem(ItemSO item)
+	public void EquipItem(ItemSO item, ItemSO.Type type)
 	{
 		EquipmentSlot slot;
 
         foreach (EquipmentSlot equipmentSlot in equipmentSlots)
         {
-			if(equipmentSlot.type == item.type)
+			if(equipmentSlot.type == type)
 			{
 				slot = equipmentSlot;
 				break;
@@ -70,5 +71,12 @@ public class EquipmentSystem : MonoBehaviour
 				slot.textureSwap.gameObject.SetActive(false);
             }
         }
+
+		OnEquipsChanged?.Invoke();
+    }
+
+	public EquipmentSlot[] GetEquipmentSlots()
+	{
+		return equipmentSlots;
 	}
 }
