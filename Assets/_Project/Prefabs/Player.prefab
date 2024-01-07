@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc9f3d2abdeb044ba58edd63b79b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8427410553335140068}
   itemSlots:
   - itemSO: {fileID: 0}
     type: 0

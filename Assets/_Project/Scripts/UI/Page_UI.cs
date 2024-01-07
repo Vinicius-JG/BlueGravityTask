@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Purchasing.MiniJSON;
 
 public class Page_UI : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup;
     bool isOn;
     bool fading;
+
+    private void Awake()
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
+    }
 
     public void SetVisibility(bool value)
     {
@@ -24,7 +31,7 @@ public class Page_UI : MonoBehaviour
         });
     }
 
-    public bool Ison()
+    public bool IsOn()
     {
         return isOn;
     }

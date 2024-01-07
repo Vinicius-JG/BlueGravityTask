@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Actor
 {
     [SerializeField] Inventory_UI inventory_UI;
 
@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventory_UI?.SetVisibility(!inventory_UI.Ison());
+            inventory_UI?.SetVisibility(!inventory_UI.IsOn());
         }
     }
 }

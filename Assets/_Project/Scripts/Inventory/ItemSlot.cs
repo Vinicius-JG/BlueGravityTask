@@ -6,12 +6,12 @@ using UnityEngine;
 [Serializable]
 public class ItemSlot
 {
-    public ItemSO itemSO;
+    public Item item;
     public ItemSO.Type type;
     [HideInInspector] public Inventory inventory;
 
-    public bool CanReceiveItem(ItemSO itemToReceive)
+    public bool CanReceiveItem(Item itemToReceive)
     {
-        return type == ItemSO.Type.None || itemToReceive?.type == type || itemToReceive == null;
+        return type == ItemSO.Type.None || itemToReceive.data?.type == type || itemToReceive.data == null;
     }
 }

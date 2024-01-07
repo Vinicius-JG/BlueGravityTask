@@ -16,8 +16,8 @@ public class ItemSlot_UI : MonoBehaviour, IDropHandler
         content.transform.SetParent(transform);
         content.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         content.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        content.sprite = itemSlot.itemSO != null ? itemSlot.itemSO.icon : null;
-        content.gameObject.SetActive(itemSlot.itemSO != null);
+        content.sprite = itemSlot.item.data != null ? itemSlot.item.data.icon : null;
+        content.gameObject.SetActive(itemSlot.item.data != null);
     }
 
     public virtual void OnDrop(PointerEventData eventData)

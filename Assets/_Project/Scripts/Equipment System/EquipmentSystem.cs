@@ -32,7 +32,7 @@ public class EquipmentSystem : Inventory
 
             foreach (ItemSlot itemSlot in itemSlots)
             {
-                if (itemSlot.itemSO != null && itemSlot.itemSO.type == equipSlot.type)
+                if (itemSlot.item != null && itemSlot.item.data != null && itemSlot.item.data.type == equipSlot.type)
                 {
                     rightSlot = itemSlot;
                     break;
@@ -41,7 +41,7 @@ public class EquipmentSystem : Inventory
 
             if(rightSlot != null)
             {
-                equipSlot.textureSwap.Texture = rightSlot.itemSO.spriteSheet;
+                equipSlot.textureSwap.Texture = rightSlot.item.data.spriteSheet;
             }
             else
             {
@@ -56,9 +56,9 @@ public class EquipmentSystem : Inventory
     {
         foreach (ItemSlot itemSlot in itemSlots)
         {
-            if(itemSlot.itemSO != null && itemSlot.itemSO.typeToDisableWhenEquipped != ItemSO.Type.None)
+            if(itemSlot.item != null && itemSlot.item.data != null && itemSlot.item.data.typeToDisableWhenEquipped != ItemSO.Type.None)
             {
-                equipSlots.ToList().Find(x => x.type == itemSlot.itemSO.typeToDisableWhenEquipped).textureSwap.gameObject.SetActive(false);
+                equipSlots.ToList().Find(x => x.type == itemSlot.item.data.typeToDisableWhenEquipped).textureSwap.gameObject.SetActive(false);
             }
         }
     }

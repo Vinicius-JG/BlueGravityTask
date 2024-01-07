@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+public class NPC : Actor
 {
     [SerializeField] List<Animator> animators;
     [SerializeField] Vector2 lookDir;
