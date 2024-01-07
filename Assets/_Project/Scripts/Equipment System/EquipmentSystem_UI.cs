@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class EquipmentSystem_UI : MonoBehaviour
 {
-    public EquipmentSystem equipmentSystem;
-    [SerializeField] List<EquipmentSlot_UI> equipmentSlots_UI;
+    [SerializeField] EquipmentSystem inventory;
+    [SerializeField] List<ItemSlot_UI> itemSlots_UI;
 
     private void Start()
     {
         RefreshEquipments();
-        equipmentSystem.OnEquipsChanged += RefreshEquipments;
+        inventory.OnItemsChanged += RefreshEquipments;
     }
 
     void RefreshEquipments()
     {
-        foreach (var slot_UI in equipmentSlots_UI)
+        for (int i = 0; i < itemSlots_UI.Count; i++)
         {
-            EquipmentSystem.EquipmentSlot[] slots = equipmentSystem.GetEquipmentSlots();
-
-            for (int i = 0; i < slots.Length; i++)
-            {
-                if (slots[i].type == slot_UI.requiredType)
-                    slot_UI.Initialize(slots[i].itemSO, null);
-            }
+            itemSlots_UI[i].GetComponent<ItemSlot_UI>()?.Initialize(inventory.GetItemSlots()[i]);
         }
     }
 }

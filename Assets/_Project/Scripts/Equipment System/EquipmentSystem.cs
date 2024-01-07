@@ -5,78 +5,55 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EquipmentSystem : MonoBehaviour
+public class EquipmentSystem : Inventory
 {
-	[Serializable]
-	public struct EquipmentSlot
-	{
-		public ItemSO.Type type;
-        public ItemSO itemSO;
+    [Serializable]
+    public struct EquipSlot
+    {
         public SpriteRendererTextureSwap textureSwap;
-	}
+        public ItemSO.Type type;
+    }
 
-	[SerializeField] EquipmentSlot[] equipmentSlots;
-    public Action OnEquipsChanged;
+    [SerializeField] EquipSlot[] equipSlots;
 
     private void Awake()
 	{
+        SetSlotsInventory();
 		RefreshEquipments();
+		OnItemsChanged += RefreshEquipments;
 	}
-
-	public void EquipItem(ItemSO item, ItemSO.Type type)
-	{
-		EquipmentSlot slot;
-
-        foreach (EquipmentSlot equipmentSlot in equipmentSlots)
-        {
-			if(equipmentSlot.type == type)
-			{
-				slot = equipmentSlot;
-				break;
-            }
-        }
-
-		slot.itemSO = item;
-		RefreshEquipments();
-    }
-
-	public void RemoveItem(ItemSO item)
-	{
-        EquipmentSlot slot;
-
-        foreach (EquipmentSlot equipmentSlot in equipmentSlots)
-        {
-            if (equipmentSlot.itemSO == item)
-            {
-                slot = equipmentSlot;
-                break;
-            }
-        }
-
-        slot.itemSO = null;
-        RefreshEquipments();
-    }
 
 	void RefreshEquipments()
 	{
-		foreach (EquipmentSlot equipmentSlot in equipmentSlots)
+		foreach (EquipSlot equipSlot in equipSlots)
 		{
-			equipmentSlot.textureSwap.Texture = equipmentSlot.itemSO.spriteSheet;
+            equipSlot.textureSwap.gameObject.SetActive(true);
+            ItemSlot rightSlot = null;
 
-            equipmentSlot.textureSwap.gameObject.SetActive(true);
-
-            if (equipmentSlot.itemSO.typeToDisableWhenEquipped != ItemSO.Type.None)
-			{
-				EquipmentSlot slot = equipmentSlots.ToList().Find(x => x.type == equipmentSlot.itemSO.typeToDisableWhenEquipped);
-				slot.textureSwap.gameObject.SetActive(false);
+            foreach (ItemSlot itemSlot in itemSlots)
+            {
+                if (itemSlot.itemSO != null && itemSlot.itemSO.type == equipSlot.type)
+                {
+                    rightSlot = itemSlot;
+                    break;
+                }
             }
+
+            if(rightSlot != null)
+            {
+                equipSlot.textureSwap.Texture = rightSlot.itemSO.spriteSheet;
+
+                if(rightSlot.itemSO.typeToDisableWhenEquipped != ItemSO.Type.None)
+                {
+                    EquipSlot equipSlotToDisable = equipSlots.ToList().Find(x => x.type == rightSlot.itemSO.typeToDisableWhenEquipped);
+                    equipSlotToDisable.textureSwap.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                equipSlot.textureSwap.gameObject.SetActive(false);
+            }
+
         }
-
-		OnEquipsChanged?.Invoke();
     }
-
-	public EquipmentSlot[] GetEquipmentSlots()
-	{
-		return equipmentSlots;
-	}
 }

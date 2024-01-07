@@ -10,10 +10,4 @@ public class InventorySlot_UI : ItemSlot_UI
     {
         base.OnDrop(eventData);
     }
-
-    public override void Refresh()
-    {
-        base.Refresh();
-        inventory.AddItem(item, transform.GetSiblingIndex());
-    }
 }

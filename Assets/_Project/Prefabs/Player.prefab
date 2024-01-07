@@ -67,19 +67,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc9f3d2abdeb044ba58edd63b79b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  itemSlots:
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 11400000, guid: 87275d997ae2e6c478ddaaeb63eace49, type: 2}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 0
+    inventory: {fileID: 0}
 --- !u!114 &6741711696093010344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,16 +116,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41d6f3414b76324d993c9ed541ff7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentSlots:
-  - type: 1
-    itemSO: {fileID: 11400000, guid: 033b841d48e186845a8dc4989471dfdc, type: 2}
-    textureSwap: {fileID: 6741711698061689664}
-  - type: 2
-    itemSO: {fileID: 11400000, guid: b560bb0d6ff89b24682c8bd540f5b810, type: 2}
-    textureSwap: {fileID: 6741711696764015723}
-  - type: 3
-    itemSO: {fileID: 11400000, guid: 87275d997ae2e6c478ddaaeb63eace49, type: 2}
-    textureSwap: {fileID: 6741711696096343969}
+  itemSlots:
+  - itemSO: {fileID: 0}
+    type: 3
+    inventory: {fileID: 0}
+  - itemSO: {fileID: 0}
+    type: 1
+    inventory: {fileID: 0}
+  equipSlots:
+  - textureSwap: {fileID: 6741711698061689664}
+    type: 1
+  - textureSwap: {fileID: 6741711696764015723}
+    type: 2
+  - textureSwap: {fileID: 6741711696096343969}
+    type: 3
 --- !u!50 &6741711696093010350
 Rigidbody2D:
   serializedVersion: 4

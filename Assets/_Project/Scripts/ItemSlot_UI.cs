@@ -7,20 +7,17 @@ using UnityEngine.UI;
 
 public class ItemSlot_UI : MonoBehaviour, IDropHandler
 {
-    [HideInInspector] public Inventory inventory;
-    public ItemSO item;
-    public ItemSO.Type requiredType;
+    [HideInInspector] public ItemSlot itemSlot;
     [SerializeField] Image content;
 
-    public void Initialize(ItemSO item, Inventory inventory)
+    public void Initialize(ItemSlot itemSlot)
     {
-        this.item = item;
-        this.inventory = inventory;
+        this.itemSlot = itemSlot;
         content.transform.SetParent(transform);
         content.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         content.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        content.sprite = item != null ? item.icon : null;
-        content.gameObject.SetActive(item != null);
+        content.sprite = itemSlot.itemSO != null ? itemSlot.itemSO.icon : null;
+        content.gameObject.SetActive(itemSlot.itemSO != null);
     }
 
     public virtual void OnDrop(PointerEventData eventData)
@@ -29,19 +26,7 @@ public class ItemSlot_UI : MonoBehaviour, IDropHandler
 
         if (itemSlot_UI != null)
         {
-            if(requiredType == ItemSO.Type.None || requiredType == itemSlot_UI.item.type)
-            {
-                ItemSO temp = itemSlot_UI.item;
-                itemSlot_UI.item = item;
-                item = temp;
-                Refresh();
-                itemSlot_UI.Refresh();
-            }
+            itemSlot.inventory.TrySwapItems(itemSlot_UI.itemSlot, this.itemSlot);
         }
-    }
-
-    public virtual void Refresh()
-    {
-
     }
 }

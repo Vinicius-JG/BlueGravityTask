@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Inventory_UI : MonoBehaviour
 {
+    [SerializeField] GameObject slot_UI;
+
     public Inventory inventory;
     public Transform itemsHolder;
 
-    private void Awake()
+    private void Start()
     {
         RefreshItems();
         inventory.OnItemsChanged += RefreshItems;
@@ -15,12 +17,15 @@ public class Inventory_UI : MonoBehaviour
 
     void RefreshItems()
     {
-        for (int i = 0; i < itemsHolder.childCount; i++)
+        foreach (Transform slot in itemsHolder)
         {
-            if (i < inventory.GetItems().Count)
-                itemsHolder.GetChild(i).GetComponent<ItemSlot_UI>()?.Initialize(inventory.GetItems()[i], inventory);
-            else
-                itemsHolder.GetChild(i).GetComponent<ItemSlot_UI>()?.Initialize(null, inventory);
+            Destroy(slot.gameObject);
+        }
+
+        for (int i = 0; i < inventory.GetItemSlots().Count; i++)
+        {
+            GameObject newSlot_UI = Instantiate(slot_UI, itemsHolder);
+            newSlot_UI.GetComponent<ItemSlot_UI>()?.Initialize(inventory.GetItemSlots()[i]);
         }
     }
 }
