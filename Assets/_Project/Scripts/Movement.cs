@@ -37,8 +37,9 @@ public class Movement : MonoBehaviour
 
     private void HandleMovement()
     {
-        rb.velocity = input.normalized * speed * Time.fixedDeltaTime;
-        isMoving = rb.velocity.magnitude > 0;
+        //rb.velocity = input.normalized * speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + input.normalized * speed * Time.fixedDeltaTime);
+        isMoving = input != Vector2.zero;
     }
 
     private void HandleAnimation()

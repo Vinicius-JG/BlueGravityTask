@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Blue Armor
   spriteSheet: {fileID: 2800000, guid: 5e1135417db0ddb4e89f302ea1aceb03, type: 3}
+  icon: {fileID: 21300000, guid: 028ecf50a64841b4c8bca5b0502fdb5a, type: 3}
   price: 150
   type: 1
   typeToDisableWhenEquipped: 0

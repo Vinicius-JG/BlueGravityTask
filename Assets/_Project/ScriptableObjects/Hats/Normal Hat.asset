@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Normal Hat
   spriteSheet: {fileID: 2800000, guid: 76f8eef3e00b6bf40a7a4fe57d443f1f, type: 3}
+  icon: {fileID: 21300000, guid: 6856d22b91ab3ba4ea59cce98a0037cf, type: 3}
   price: 50
   type: 3
   typeToDisableWhenEquipped: 2

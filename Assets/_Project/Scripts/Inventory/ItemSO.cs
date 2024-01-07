@@ -13,6 +13,7 @@ public class ItemSO : ScriptableObject
 
     public string itemName;
     public Texture2D spriteSheet;
+    public Sprite icon;
     public int price;
     public Type type;
     public Type typeToDisableWhenEquipped;

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Witch Hat
   spriteSheet: {fileID: 2800000, guid: b7c8f64735c63e848bc41e1259c00c3a, type: 3}
+  icon: {fileID: 21300000, guid: 1913eab0be37a26479aeefa291debba0, type: 3}
   price: 75
   type: 3
   typeToDisableWhenEquipped: 2
