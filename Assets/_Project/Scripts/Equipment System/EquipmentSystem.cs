@@ -42,18 +42,25 @@ public class EquipmentSystem : Inventory
             if(rightSlot != null)
             {
                 equipSlot.textureSwap.Texture = rightSlot.itemSO.spriteSheet;
-
-                if(rightSlot.itemSO.typeToDisableWhenEquipped != ItemSO.Type.None)
-                {
-                    EquipSlot equipSlotToDisable = equipSlots.ToList().Find(x => x.type == rightSlot.itemSO.typeToDisableWhenEquipped);
-                    equipSlotToDisable.textureSwap.gameObject.SetActive(false);
-                }
             }
             else
             {
                 equipSlot.textureSwap.gameObject.SetActive(false);
             }
+        }
 
+        CheckEquipsToDisable();
+    }
+
+    void CheckEquipsToDisable()
+    {
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            if(itemSlot.itemSO != null && itemSlot.itemSO.typeToDisableWhenEquipped != ItemSO.Type.None)
+            {
+                equipSlots.ToList().Find(x => x.type == itemSlot.itemSO.typeToDisableWhenEquipped).textureSwap.gameObject.SetActive(false);
+            }
         }
     }
+
 }
