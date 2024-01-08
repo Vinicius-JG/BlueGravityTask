@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
@@ -16,21 +17,16 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void Start()
     {
-        HandleInput();
+        GetComponent<Player>().GetInputActions().Gameplay.Move.performed += OnMove;
+        GetComponent<Player>().GetInputActions().Gameplay.Move.canceled += CancelMove;
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
         HandleAnimation();
-    }
-
-    private void HandleInput()
-    {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
     }
 
     private void HandleMovement()
@@ -60,5 +56,15 @@ public class Movement : MonoBehaviour
     public Vector2 GetLookDir()
     {
         return lookDir;
+    }
+
+    void OnMove(InputAction.CallbackContext ctx)
+    {
+        input = ctx.ReadValue<Vector2>();
+    }
+
+    void CancelMove(InputAction.CallbackContext ctx)
+    {
+        input = Vector2.zero;
     }
 }

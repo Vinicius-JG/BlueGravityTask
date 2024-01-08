@@ -13,9 +13,8 @@ public class Interactor : MonoBehaviour
     private void Update()
     {
         transform.localPosition = movement.GetLookDir();
-
-        if (Input.GetKeyDown(KeyCode.E))
-            interactable?.Interact(transform.root.GetComponent<Actor>());
+        
+        transform.root.GetComponent<Player>().GetInputActions().Gameplay.Interact.performed += ctx => interactable?.Interact(transform.root.GetComponent<Actor>());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

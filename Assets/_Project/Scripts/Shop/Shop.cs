@@ -4,51 +4,44 @@ using UnityEngine;
 
 public class Shop : Interactable
 {
+    Actor actor;
     [SerializeField] Inventory_UI inventory_UI;
     [SerializeField] Inventory_UI playerInventory_UI;
     [SerializeField] Inventory_UI basketInventory_UI;
 
     [SerializeField] Basket basket;
 
-    bool active;
-
     private void Awake()
     {
         OnInteract += Enter;
     }
 
-    private void Update()
-    {
-        if (active)
-        {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-                basket.ConfirmTransaction();
-
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
-                Exit();
-        }
-    }
-
     void Enter(Actor customer)
     {
-        active = true;
+        actor = customer;
         basket.Initialize(customer, GetComponent<Inventory>());
         basketInventory_UI.SetInventory(basket);
         inventory_UI.SetInventory(GetComponent<Inventory>());
 
-        inventory_UI.SetVisibility(active);
-        basketInventory_UI.SetVisibility(active);
-        playerInventory_UI.SetVisibility(active);
+        inventory_UI.SetVisibility(true);
+        basketInventory_UI.SetVisibility(true);
+        playerInventory_UI.SetVisibility(true);
+
+        actor.GetComponent<Player>().GetInputActions().UI.Back.performed += ctx => Exit();
+        actor.GetComponent<Player>().GetInputActions().UI.Submit.performed += ctx => basket.ConfirmTransaction();
+        actor.GetComponent<Player>().GetInputActions().Gameplay.Disable();
     }
 
     void Exit()
     {
-        active = false;
-
-        inventory_UI.SetVisibility(active);
-        basketInventory_UI.SetVisibility(active);
-        playerInventory_UI.SetVisibility(active);
+        inventory_UI.SetVisibility(false);
+        basketInventory_UI.SetVisibility(false);
+        playerInventory_UI.SetVisibility(false);
 
         basket.CancelTransaction();
+
+        actor.GetComponent<Player>().GetInputActions().UI.Submit.performed -= ctx => basket.ConfirmTransaction();
+        actor.GetComponent<Player>().GetInputActions().UI.Back.performed -= ctx => Exit();
+        actor.GetComponent<Player>().GetInputActions().Gameplay.Enable();
     }
 }

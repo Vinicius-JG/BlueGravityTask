@@ -13,19 +13,25 @@ public class Page_UI : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
     }
 
-    public void SetVisibility(bool value)
+    public void Fade(bool value)
     {
         if (fading)
             return;
 
-        canvasGroup.alpha = value ? 0f : 1f;
-        canvasGroup.blocksRaycasts = !value;
+        SetVisibility(!value);
+
         fading = true;
         canvasGroup.DOFade(value ? 1f : 0f, 0.25f).OnComplete(() => {
-            canvasGroup.blocksRaycasts = value;
-            isOn = value;
+            SetVisibility(value);
             fading = false;
-        }).SetUpdate(true);
+        }).SetUpdate(true).OnKill(() => fading = false);
+    }
+
+    public void SetVisibility(bool value)
+    {
+        canvasGroup.alpha = value ? 1f : 0f;
+        canvasGroup.blocksRaycasts = value;
+        isOn = value;
     }
 
     public bool IsOn()
