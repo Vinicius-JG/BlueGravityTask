@@ -19,7 +19,7 @@ public class Shop : Interactable
     void Enter(Actor customer)
     {
         actor = customer;
-        basket.Initialize(customer, GetComponent<Inventory>());
+        basket.SetBasket(customer, GetComponent<Inventory>());
         basketInventory_UI.SetInventory(basket);
         inventory_UI.SetInventory(GetComponent<Inventory>());
 
@@ -34,14 +34,14 @@ public class Shop : Interactable
 
     void Exit()
     {
+        actor.GetComponent<Player>().GetInputActions().UI.Submit.performed -= ctx => basket.ConfirmTransaction();
+        actor.GetComponent<Player>().GetInputActions().UI.Back.performed -= ctx => Exit();
+        actor.GetComponent<Player>().GetInputActions().Gameplay.Enable();
+
         inventory_UI.SetVisibility(false);
         basketInventory_UI.SetVisibility(false);
         playerInventory_UI.SetVisibility(false);
 
         basket.CancelTransaction();
-
-        actor.GetComponent<Player>().GetInputActions().UI.Submit.performed -= ctx => basket.ConfirmTransaction();
-        actor.GetComponent<Player>().GetInputActions().UI.Back.performed -= ctx => Exit();
-        actor.GetComponent<Player>().GetInputActions().Gameplay.Enable();
     }
 }

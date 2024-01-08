@@ -17,6 +17,7 @@ public class Basket_UI : Inventory_UI
         RefreshText();
         inventory.OnItemsChanged += RefreshText;
         inventory.OnItemsChanged += RefreshItems;
+        inventory.OnItemsChanged += RefreshSubmitBtn;
         submitBtn.onClick.AddListener(inventory.GetComponent<Basket>().ConfirmTransaction);
     }
 
@@ -28,5 +29,10 @@ public class Basket_UI : Inventory_UI
 
         if(basket.GetCustomer() != null)
             finalBalanceTMP.text = (basket.GetCustomer().GetMoney() + basket.GetTotal()).ToString();
+    }
+
+    void RefreshSubmitBtn()
+    {
+        submitBtn.interactable = inventory.GetComponent<Basket>().IsAValidTransaction();
     }
 }

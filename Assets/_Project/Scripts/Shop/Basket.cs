@@ -14,7 +14,7 @@ public class Basket : Inventory
         OnItemsChanged += CalculateTotal;
     }
 
-    public void Initialize(Actor customer, Inventory shopInventory)
+    public void SetBasket(Actor customer, Inventory shopInventory)
     {
         this.customer = customer;
         this.shopInventory = shopInventory;
@@ -22,7 +22,7 @@ public class Basket : Inventory
 
     public void ConfirmTransaction()
     {
-        if (-GetTotal() > customer.GetMoney())
+        if (!IsAValidTransaction() || GetNonEmptySlotsCount() == 0)
             return;
 
         customer.ChangeMoney(GetTotal());
@@ -59,9 +59,6 @@ public class Basket : Inventory
         }
 
         Clear();
-
-        customer = null;
-        shopInventory = null;
     }
 
     public void Clear()
@@ -86,6 +83,11 @@ public class Basket : Inventory
                     total -= itemSlot.item.data.price;
             }
         }
+    }
+
+    public bool IsAValidTransaction()
+    {
+        return customer.GetMoney() >= -total;
     }
 
     public Actor GetCustomer()

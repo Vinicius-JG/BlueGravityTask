@@ -52,6 +52,19 @@ public class Inventory : MonoBehaviour
         return itemSlots;
     }
 
+    public int GetNonEmptySlotsCount()
+    {
+        int count = 0;
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            if(itemSlot.item.data != null)
+                count++;
+        }
+
+        return count;
+    }
+
     protected void SetSlotsInventory()
     {
         foreach (var slot in itemSlots)
