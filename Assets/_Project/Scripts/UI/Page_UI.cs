@@ -1,29 +1,14 @@
 using UnityEngine;
-using DG.Tweening;
+using System.Collections;
 
 public class Page_UI : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup;
     bool isOn;
-    bool fading;
 
     private void Awake()
     {
         SetVisibility(false);
-    }
-
-    public void Fade(bool value)
-    {
-        if (fading)
-            return;
-
-        SetVisibility(!value);
-
-        fading = true;
-        canvasGroup.DOFade(value ? 1f : 0f, 0.25f).OnComplete(() => {
-            SetVisibility(value);
-            fading = false;
-        }).SetUpdate(true).OnKill(() => fading = false);
     }
 
     public void SetVisibility(bool value)

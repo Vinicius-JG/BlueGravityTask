@@ -9,7 +9,7 @@ public class Player : Actor
     private void Awake()
     {
         inputActions = new PlayerInputActions();
-        inventory_UI.SetInventory(GetComponent<Inventory>());
+        inventory_UI.Initialize(GetComponent<Inventory>());
         inputActions.Gameplay.InventoryToggle.performed += ctx => inventory_UI?.SetVisibility(!inventory_UI.IsOn());
     }
 

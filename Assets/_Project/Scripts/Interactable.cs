@@ -9,7 +9,6 @@ public abstract class Interactable : MonoBehaviour
     public void Interact(Actor actor)
     {
         OnInteract?.Invoke(actor);
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.genericAudioClips[0]);
     }
 
     public void SetInteractionCanvasVisibility(bool value)

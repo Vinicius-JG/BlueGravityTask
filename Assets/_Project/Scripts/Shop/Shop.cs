@@ -7,7 +7,7 @@ public class Shop : Interactable
     Actor actor;
     [SerializeField] Inventory_UI inventory_UI;
     [SerializeField] Inventory_UI playerInventory_UI;
-    [SerializeField] Inventory_UI basketInventory_UI;
+    [SerializeField] Basket_UI basketInventory_UI;
 
     [SerializeField] Basket basket;
 
@@ -20,8 +20,8 @@ public class Shop : Interactable
     {
         actor = customer;
         basket.SetBasket(customer, GetComponent<Inventory>());
-        basketInventory_UI.SetInventory(basket);
-        inventory_UI.SetInventory(GetComponent<Inventory>());
+        basketInventory_UI.Initialize(basket);
+        inventory_UI.Initialize(GetComponent<Inventory>());
 
         inventory_UI.SetVisibility(true);
         basketInventory_UI.SetVisibility(true);
@@ -43,5 +43,6 @@ public class Shop : Interactable
         playerInventory_UI.SetVisibility(false);
 
         basket.CancelTransaction();
+        basketInventory_UI.Clear();
     }
 }

@@ -9,7 +9,7 @@ public class Inventory_UI : Page_UI
     protected Inventory inventory;
     public Transform itemsHolder;
 
-    public virtual void SetInventory(Inventory inventory)
+    public virtual void Initialize(Inventory inventory)
     {
         this.inventory = inventory;
         this.inventory.OnItemsChanged += RefreshItems;
