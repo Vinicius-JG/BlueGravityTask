@@ -45,6 +45,7 @@ public class Basket : Inventory
         }
 
         Clear();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.genericAudioClips[2]);
     }
 
     public void CancelTransaction()

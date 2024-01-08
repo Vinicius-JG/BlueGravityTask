@@ -9,8 +9,7 @@ public class Page_UI : MonoBehaviour
 
     private void Awake()
     {
-        canvasGroup.alpha = 0;
-        canvasGroup.blocksRaycasts = false;
+        SetVisibility(false);
     }
 
     public void Fade(bool value)
@@ -29,6 +28,9 @@ public class Page_UI : MonoBehaviour
 
     public void SetVisibility(bool value)
     {
+        if (value != isOn)
+            AudioManager.Instance.PlaySFX(value ? AudioManager.Instance.genericAudioClips[0] : AudioManager.Instance.genericAudioClips[1]);
+
         canvasGroup.alpha = value ? 1f : 0f;
         canvasGroup.blocksRaycasts = value;
         isOn = value;

@@ -10,11 +10,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        player.GetInputActions().Gameplay.Pause.performed += ctx => Pause(true);
-        player.GetInputActions().UI.Back.performed += ctx => Pause(false);
+        player.GetInputActions().Gameplay.Pause.performed += ctx => Pause(!isPaused);
     }
 
-    void Pause(bool value)
+    public void Pause(bool value)
     {
         isPaused = value;
         Time.timeScale = isPaused ? 0.0f : 1.0f;
@@ -23,11 +22,11 @@ public class GameController : MonoBehaviour
         if(isPaused)
         {
             player.GetInputActions().Gameplay.Disable();
+            player.GetInputActions().Gameplay.Pause.Enable();
         }
         else
         {
             player.GetInputActions().Gameplay.Enable();
-            player.GetInputActions().UI.Back.performed -= ctx => Pause(false);
         }
     }
 
