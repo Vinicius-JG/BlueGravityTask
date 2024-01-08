@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class DragAndDrop_UI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    Transform dragCanvas;
+
     RectTransform rectTransform;
     CanvasGroup canvasGroup;
 
@@ -15,13 +17,14 @@ public class DragAndDrop_UI : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        dragCanvas = GameObject.Find("Drag_Canvas").transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
         startParent = transform.parent;
-        transform.SetParent(startParent.root);
+        transform.SetParent(dragCanvas);
     }
 
     public void OnDrag(PointerEventData eventData)
