@@ -9,6 +9,9 @@ public class ItemSlot_UI : MonoBehaviour, IDropHandler
 {
     [HideInInspector] public ItemSlot itemSlot;
     [SerializeField] Image content;
+    [SerializeField] Image requiredTypeIcon;
+    [SerializeField] Sprite hatIcon;
+    [SerializeField] Sprite outfitIcon;
 
     public void Initialize(ItemSlot itemSlot)
     {
@@ -28,5 +31,32 @@ public class ItemSlot_UI : MonoBehaviour, IDropHandler
         {
             itemSlot.inventory.TrySwapItems(itemSlot_UI.itemSlot, this.itemSlot);
         }
+    }
+
+    private void Update()
+    {
+        CheckRequiredTypeIcon();
+    }
+
+    void CheckRequiredTypeIcon()
+    {
+        if(itemSlot.item.data != null && content.rectTransform.anchoredPosition == Vector2.zero)
+        {
+            requiredTypeIcon.gameObject.SetActive(false);
+            return;
+        }
+
+        if (itemSlot.type == ItemSO.Type.Hat)
+        {
+            requiredTypeIcon.gameObject.SetActive(true);
+            requiredTypeIcon.sprite = hatIcon;
+        }
+        else if (itemSlot.type == ItemSO.Type.Outfit)
+        {
+            requiredTypeIcon.gameObject.SetActive(true);
+            requiredTypeIcon.sprite = outfitIcon;
+        }
+        else
+            requiredTypeIcon.gameObject.SetActive(false);
     }
 }

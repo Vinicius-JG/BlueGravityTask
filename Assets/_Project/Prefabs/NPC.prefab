@@ -251,12 +251,12 @@ MonoBehaviour:
   itemSlots:
   - item:
       owner: {fileID: 0}
-      data: {fileID: 11400000, guid: 033b841d48e186845a8dc4989471dfdc, type: 2}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
   - item:
       owner: {fileID: 0}
-      data: {fileID: 11400000, guid: 7b9124800ad546d4ab21b00c470642cb, type: 2}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
   - item:
