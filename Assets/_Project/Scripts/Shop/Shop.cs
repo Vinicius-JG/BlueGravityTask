@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class Shop : Interactable
 {
-    Actor actor;
+    [SerializeField] Inventory shopInventory;
     [SerializeField] Inventory_UI inventory_UI;
-    [SerializeField] Inventory_UI playerInventory_UI;
     [SerializeField] Basket_UI basketInventory_UI;
 
     [SerializeField] Basket basket;
+
+    Actor actor;
+    Inventory_UI playerInventory_UI;
 
     private void Awake()
     {
         OnInteract += Enter;
     }
 
+    private void Start()
+    {
+        inventory_UI.Initialize(shopInventory);
+    }
+
     void Enter(Actor customer)
     {
         actor = customer;
-        basket.SetBasket(customer, GetComponent<Inventory>());
+        basket.SetBasket(customer, shopInventory);
         basketInventory_UI.Initialize(basket);
-        inventory_UI.Initialize(GetComponent<Inventory>());
+
+        playerInventory_UI = customer.GetComponentInChildren<Inventory_UI>();
 
         inventory_UI.SetVisibility(true);
         basketInventory_UI.SetVisibility(true);
