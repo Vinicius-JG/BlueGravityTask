@@ -6,13 +6,14 @@ public class Inventory_UI : Page_UI
 {
     [SerializeField] GameObject slot_UI;
 
-    public Inventory inventory;
+    protected Inventory inventory;
     public Transform itemsHolder;
 
-    private void Start()
+    public virtual void SetInventory(Inventory inventory)
     {
+        this.inventory = inventory;
+        this.inventory.OnItemsChanged += RefreshItems;
         RefreshItems();
-        inventory.OnItemsChanged += RefreshItems;
     }
 
     protected void RefreshItems()

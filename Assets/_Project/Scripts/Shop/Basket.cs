@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class Basket : Inventory
@@ -22,6 +23,11 @@ public class Basket : Inventory
 
     public void ConfirmTransaction()
     {
+        if (-GetTotal() > customer.GetMoney())
+            return;
+
+        customer.ChangeMoney(GetTotal());
+
         foreach (ItemSlot itemSlot in itemSlots)
         {
             if (itemSlot.item.data != null)

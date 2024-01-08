@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
     private void Update()
     {
         HandleInput();
@@ -57,5 +56,10 @@ public class Movement : MonoBehaviour
 
             animator.SetBool("IsMoving", isMoving);
         }
+    }
+
+    public Vector2 GetLookDir()
+    {
+        return lookDir;
     }
 }

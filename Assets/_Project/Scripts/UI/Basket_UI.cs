@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Basket_UI : Inventory_UI
 {
+    [SerializeField] Button submitBtn;
     [SerializeField] TextMeshProUGUI totalTMP;
     [SerializeField] TextMeshProUGUI finalBalanceTMP;
 
-    private void Start()
+    public override void SetInventory(Inventory inventory)
     {
+        base.SetInventory(inventory);
         RefreshItems();
         RefreshText();
         inventory.OnItemsChanged += RefreshText;
         inventory.OnItemsChanged += RefreshItems;
+        submitBtn.onClick.AddListener(inventory.GetComponent<Basket>().ConfirmTransaction);
     }
 
     void RefreshText()
