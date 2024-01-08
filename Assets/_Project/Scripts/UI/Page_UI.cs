@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Purchasing.MiniJSON;
 
 public class Page_UI : MonoBehaviour
 {
@@ -28,7 +25,7 @@ public class Page_UI : MonoBehaviour
             canvasGroup.blocksRaycasts = value;
             isOn = value;
             fading = false;
-        });
+        }).SetUpdate(true);
     }
 
     public bool IsOn()
