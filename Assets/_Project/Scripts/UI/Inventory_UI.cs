@@ -15,7 +15,7 @@ public class Inventory_UI : Page_UI
         inventory.OnItemsChanged += RefreshItems;
     }
 
-    void RefreshItems()
+    protected void RefreshItems()
     {
         foreach (Transform slot in itemsHolder)
         {

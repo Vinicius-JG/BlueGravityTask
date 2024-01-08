@@ -4,6 +4,44 @@ using UnityEngine;
 
 public class Basket : Inventory
 {
+    Actor customer;
+    Inventory shopInventory;
+    int total;
+
+    private void Awake()
+    {
+        SetSlotsInventory();
+        OnItemsChanged += CalculateTotal;
+    }
+
+    public void Initialize(Actor customer, Inventory shopInventory)
+    {
+        this.customer = customer;
+        this.shopInventory = shopInventory;
+    }
+
+    public void ConfirmTransaction()
+    {
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            if (itemSlot.item.data != null)
+            {
+                if (itemSlot.item.owner == customer)
+                {
+                    itemSlot.item.owner = shopInventory.owner;
+                    shopInventory.AddItem(itemSlot.item);
+                }
+                else if (itemSlot.item.owner == shopInventory.owner)
+                {
+                    itemSlot.item.owner = customer;
+                    customer.GetComponent<Inventory>().AddItem(itemSlot.item);
+                }
+            }
+        }
+
+        Clear();
+    }
+
     public void CancelTransaction()
     {
         foreach (ItemSlot itemSlot in itemSlots)
@@ -15,6 +53,9 @@ public class Basket : Inventory
         }
 
         Clear();
+
+        customer = null;
+        shopInventory = null;
     }
 
     public void Clear()
@@ -23,5 +64,36 @@ public class Basket : Inventory
         {
             RemoveItem(itemSlot);
         }
+    }
+
+    void CalculateTotal()
+    {
+        total = 0;
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            if (itemSlot.item.data != null)
+            {
+                if(itemSlot.item.owner == customer)
+                    total += itemSlot.item.data.price;
+                else
+                    total -= itemSlot.item.data.price;
+            }
+        }
+    }
+
+    public Actor GetCustomer()
+    {
+        return customer;
+    }
+
+    public Inventory GetShopInventory()
+    {
+        return shopInventory;
+    }
+
+    public int GetTotal()
+    {
+        return total;
     }
 }

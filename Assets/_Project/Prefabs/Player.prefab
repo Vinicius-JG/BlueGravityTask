@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fcf16c11e94db4fa2f0104510f5790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 500
   inventory_UI: {fileID: 0}
 --- !u!114 &6741711696093010345
 MonoBehaviour:
@@ -82,40 +83,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8427410553335140068}
   itemSlots:
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 11400000, guid: 87275d997ae2e6c478ddaaeb63eace49, type: 2}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 11400000, guid: 033b841d48e186845a8dc4989471dfdc, type: 2}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
-  - itemSO: {fileID: 0}
+  - item:
+      owner: {fileID: 0}
+      data: {fileID: 0}
     type: 0
     inventory: {fileID: 0}
 --- !u!50 &6741711696093010350
@@ -162,6 +187,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6741711696093010348}
     m_Modifications:
+    - target: {fileID: 5922848783408878581, guid: a9086499fb4acc34a938cb50eb543dfa, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 8427410553335140068}
+    - target: {fileID: 5922848783408878581, guid: a9086499fb4acc34a938cb50eb543dfa, type: 3}
+      propertyPath: itemSlots.Array.data[2].item.data
+      value: 
+      objectReference: {fileID: 11400000, guid: 80d904cbc0e9b7e4c8551a4e13686dbe, type: 2}
     - target: {fileID: 8231345361666967300, guid: a9086499fb4acc34a938cb50eb543dfa, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -12,6 +12,9 @@ public class ItemSlot
 
     public bool CanReceiveItem(Item itemToReceive)
     {
-        return type == ItemSO.Type.None || itemToReceive.data?.type == type || itemToReceive.data == null;
+        bool isTypeRight = type == ItemSO.Type.None || itemToReceive.data?.type == type || itemToReceive.data == null;
+        bool isOwnershipRight = inventory.owner == null || itemToReceive.owner == inventory.owner || itemToReceive.data == null;
+
+        return isTypeRight && isOwnershipRight;
     }
 }

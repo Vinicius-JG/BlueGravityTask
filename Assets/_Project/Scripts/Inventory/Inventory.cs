@@ -40,9 +40,6 @@ public class Inventory : MonoBehaviour
         if (!firstSlot.CanReceiveItem(secondSlot.item) || !secondSlot.CanReceiveItem(firstSlot.item))
             return false;
 
-        if (firstSlot.inventory.owner != secondSlot.inventory.owner && (firstSlot.inventory.owner != null && secondSlot.inventory.owner != null))
-            return false;
-
         Item temp = firstSlot.item;
         firstSlot.item = secondSlot.item;
         secondSlot.item = temp;
